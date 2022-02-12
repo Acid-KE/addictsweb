@@ -1,0 +1,2098 @@
+<?php 
+
+
+
+ ?>
+
+ <!DOCTYPE html>
+ <html>
+ <head>
+ 	<meta charset="utf-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+ 	<title>About us</title>
+ 	<link rel="stylesheet" type="text/css" href="about.css">
+ </head>
+ <body>
+ 	<a href="index.html">🏠</a>
+ 	<div class="about_content"  align="center">
+<h1 align="center"><a href="aboutus.php">About</a></h1>
+ 	
+ 	<style type="text/css">
+ 		.about_content
+ 		{
+ 			background-color: grey;
+ 		}
+ 	</style>
+ 	
+
+
+
+ 	<p>This website is developed by <i>NYAMBANE OMBUGI DANIEL</i> a South Eastern Kenya University(SEKU) student as his project II supervised by <b>Miss. Damaris Kangogo</b>. Research and hardwork made it a success. We believe he will be amongst the best developers in the near future. </p>
+
+
+ 	
+ 	
+
+
+
+	<h2 ><u>Contact Developer:</u></h2>
+
+		<h3>Facebook</h3>
+		Click<a href="https://www.facebook.com/acid.acidic.56"> here </a> to chat me on Facebook.
+		<h3>Email</h3>
+		Click<a href="https://mail.google.com/mail/u/0/#inbox"> here </a>to inbox me on Email.
+		<h3>WhatApp</h3>
+		Click <a href="https://wa.me/message/S7ZBALCEECEHH1">here </a>to chat me on whatsapp.<br><br>
+	
+
+		<h3>Are you a new member?</h3>
+		Click <a href="signup.html"> here</a> to signup.
+			<br><br><br><br><br><br><br><br><br><br>
+		</div>
+		</div></div>
+
+
+ </body>
+ </html>
+body
+{
+	background: deepskyblue;
+	margin: 10px;
+	padding: 5px;
+}
+
+ h3
+{
+	text-align: right;
+	font-family: sans-serif;
+	margin: -1rem;
+}
+h2
+/*{
+	text-align: center;
+	background: white;
+	border-bottom: 5px solid;
+	color: blue;
+	border-radius: 20px;
+}*/
+th
+{
+	border: 1px solid;
+	border-width: 1px;
+	width: 25%;
+	background: white;
+	color: blue;
+	border-radius: 25px;
+	margin: -20%;
+}
+.admin_panel
+{
+	text-align: center;
+	background: white;
+	border-bottom: 5px solid;
+	color: blue;
+	border-radius: 20px;
+}
+.input [type="text"]
+{
+	width: 100%;
+	border-width: 1px;
+}
+/*td
+{
+	border: 1px solid;
+	border-width: 1px;
+	width: 25%;
+	background: white;
+	color: blue;
+	border-radius: 25px;
+	margin: -20%;
+}*/
+
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="admin.css">
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Admin Home</title>
+</head>
+<body>
+<h3>Admin</h3>
+<h2 class="admin_panel">Admin Panel</h2>
+<section>
+	<div class="admin_panel">
+	<form action="updatebtn.php" action="post">
+<table width="100%">
+	
+	<th>Admin Name</th>
+	<th>Updates</th>
+	<th>Advisor</th>
+	<th>Recommendation</th>
+
+	<tr>
+		<td width="25%"><input type="text" name ="disease" value="disease" required></td>
+		<td><input type="text" name="symptom" vaue="symptom" required></td>
+		<td><input type="text" name="medication" value="medication " required></td>
+		<td><input type="text" name="mode" value="mode" required></td>
+	</tr>
+
+
+</table>
+<input type="submit" value="Submit">
+</form>
+</div>
+
+</body>
+</html>
+<?php 
+session_start();
+
+$server="localhost";
+$username="root";
+$password="";
+$dbname="addicts";
+
+
+$con= mysqli_connect($server,$username,$password,$dbname);
+
+
+//check connection
+if($con=== false)
+{
+  die("Error: Could not connect.".mysqli_conect_error());
+}else
+{
+
+//Taking values from the form(input)
+$name = $_REQUEST['name'];
+$updates = $_REQUEST['updates'];
+$advisor = $_REQUEST['advisor'];
+$recommendation = $_REQUEST['recommendation'];
+}
+
+//performing insert querry
+$sql = "INSERT INTO smoker (name,updates,advisor,recommendation) VALUES ('$name','$updates','$advisor','$recommendation')";
+
+if(mysqli_query($con, $sql))
+{
+?><script type="text/javascript">
+  alert("Data stored in database successfully");
+  location="admindata.php";
+</script><?php
+}else
+
+{
+?><script type="text/javascript">
+  alert("ERROR: Hush! Sorry $sql."mysqli_error($con));
+   location="admin.html";
+</script><?php
+}
+
+//admin view
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+$server="localhost";
+$username="root";
+$password="";
+$dbname="addicts";
+
+
+$con=  mysqli_connect($server,$username,$password,$dbname);
+
+//checking for connection
+if($con->connect_error)
+{
+	die('Connect Error('.$con->connect_errno.')'.$con->connect_error);
+}
+
+//SQL query to select data from database
+
+$query="SELECT * FROM smoker ORDER BY id DESC";
+$query_run = mysqli_query($con,$query);
+
+$message= "SELECT * FROM message ORDER BY id DESC";
+$message_run= mysqli_query($con, $message);
+
+$mind = "SELECT * FROM usermind ORDER BY id DESC";
+$mind_run = mysqli_query($con, $mind);
+
+$con->close();
+
+?>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Admin Panel</title>
+</head>
+<body>
+	<a href="index.html">🏠</a>
+	<style type="text/css">
+		body
+		{
+			background-color: skyblue;
+			scroll-behavior: smooth;
+		}
+		table
+		{
+			margin: auto;
+			font-size: large;
+			border: 1px solid black;
+			width: 100%;
+
+
+		}
+		h1
+		{
+			margin: auto;
+			color: #00600;
+			font-size: xx-large;
+			font-family: 'Gill Sans','sans-serif;';
+		}
+		th
+	{
+		background-color: black;
+		color: white;
+	}
+
+
+		td
+		{
+			background-color: #E4F5D4;
+			/*border: 1px solid black;*/
+			padding: 10px;
+			text-align: center;
+		}
+		td
+		{
+			font-weight: lighter;
+		}
+		.edit
+		{
+			background-color: greenyellow;
+		    cursor: pointer;
+			font-weight: bold;
+		}
+		.delete
+		{
+			background-color: red;
+			cursor: pointer;
+			font-weight: bold;
+
+		}	
+		.h3
+		{
+			color: white;
+		}
+	</style>
+
+	<section>
+		<h1 align="center" class="h3">Welcome Admin</h1>
+		
+		
+
+	</p>
+		<table>
+			<tr>
+				<th>Admin Name</th>
+				<th>Updates</th>
+				<th>Available advisor</th>
+				<th>Recommendation</th>
+				<th>Time</th>
+				<th>Edit</th>
+				<th>Delete</th>
+
+			</tr>
+			<?php //php code to fetch data from rows
+
+
+if(mysqli_num_rows($query_run) > 0)
+{
+
+	while($rows = mysqli_fetch_assoc($query_run))
+
+{
+?>
+
+<tr>
+	
+	<td><?php echo $rows['name'];?></td>
+	<td><?php echo $rows['updates'];?></td>
+	<td><?php echo $rows['advisor'];?></td>
+	<td><?php echo $rows['recommendation'];?></td>
+	<td><?php echo $rows['time'];?></td>
+	<td class="edit"><a href="updatebtn.php"> EDIT</a></td>
+
+	<td class="delete"><a href='deletebtn.php' >DELETE</a></td>
+</tr>
+
+ <?php
+}
+
+}?>
+</table>
+</section>
+
+
+</body>
+</html><br><br>
+
+
+<h2>Add data</h2>
+
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="admin.css">
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Admin Home</title>
+</head>
+<body>
+<section>
+	<div class="admin_panel">
+	<form action="admin.php" action="post">
+	
+<table width="100%">
+	
+	            <th>Admin Name</th>
+				<th>Updates</th>
+				<th>Available Advisor</th>
+				<th>Recommendation</th>
+				
+
+
+	<tr>
+
+		<td >
+			<textarea name="name" placeholder="Admin name" rows="5" cols="30" required></textarea>
+		</td>
+
+		<td>
+
+			<textarea name="updates" placeholder="Enter updates" rows="5" cols="30" required></textarea>
+
+
+		</td>
+
+		<td>
+				<textarea name="advisor" placeholder="Advisor" rows="5" cols="30" required></textarea>
+
+
+
+		</td>
+
+		<td>
+        <textarea name="recommendation" placeholder="Recommendation" rows="5" cols="30" required></textarea>
+
+
+					</td>
+	</tr>
+
+
+</table><br>
+<input type="submit" value="PUBLISH">
+</form>
+</div>
+</section><br><br>
+<section>
+
+
+
+
+
+<h2>Comments</h2>
+<table>
+	<tr>
+	<th>Username</th>
+	<th>Comments</th>
+</tr> <?php 
+
+
+if(mysqli_num_rows($message_run) > 0)
+{
+
+
+
+
+	while($row = mysqli_fetch_assoc($message_run))
+
+{
+		?>
+			<tr>
+		<td><?php echo $row['username'];?></td>
+		<td><?php echo $row['messages'];?></td>
+	</tr><?php
+	}
+}
+ ?>
+
+
+	
+
+</table>
+</section>
+<h2>Posts from users</h2>
+
+<table>
+<tr>
+	<th>Addict Name</th>
+	<th>Post</th>
+	<th>Date/time</th>
+	</tr>
+
+<?php
+
+if(mysqli_num_rows ($mind_run) > 0)
+{
+	while($row= mysqli_fetch_assoc($mind_run))
+	{?>
+ <tr>
+<td><b><?php echo $row['username'];  ?></b> posted </td>
+<td><?php echo $row['mind'];   ?></td>
+<td><?php echo $row['time'];   ?></td>
+</tr><?php
+
+	}
+}
+
+?>
+
+</table><br><br>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+<?php
+$server="localhost";
+$username="root";
+$password="";
+$dbname="addicts";
+
+
+$con=  mysqli_connect($server,$username,$password,$dbname);
+
+//checking for connection
+if($con->connect_error)
+{
+	die('Connect Error('.$con->connect_errno.')'.$con->connect_error);
+}
+
+//SQL query to select data from database
+
+$query="SELECT * FROM smoker";
+$query_run = mysqli_query($con,$query);
+
+$con->close();
+
+?>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Smoker Panel</title>
+</head>
+<body>
+	<a href="index.html">🏠</a>
+	<style type="text/css">
+		body
+		{
+			background-color: skyblue;
+		}
+		table
+		{
+			margin: auto;
+			font-size: large;
+			border: 1px solid black;
+			width: 100%;
+
+
+		}
+		h1
+		{
+			margin: auto;
+			color: #00600;
+			font-size: xx-large;
+			font-family: 'Gill Sans','sans-serif;';
+		}
+		th
+	{
+		background-color: black;
+		color: white;
+	}
+
+
+		td
+		{
+			background-color: #E4F5D4;
+			/*border: 1px solid black;*/
+			padding: 10px;
+			text-align: center;
+		}
+		td
+		{
+			font-weight: lighter;
+		}
+	</style>
+
+	<section>
+		<h1 align="center">Welcome</h1>
+		<h3>Today's update from the Admin is as below</h3> 
+		
+
+	</p>
+		<table>
+			<tr>
+				<th>Admin Name</th>
+				<th>Updates</th>
+				<th>Recommended advisor</th>
+				<th>Recommendation</th>
+			</tr>
+<?php //php code to fetch data from rows
+
+// while($rows= mysqli_fetch_array($result))
+// if($result->num_rows > 0)
+if(mysqli_num_rows($query_run) > 0)
+{
+
+
+
+
+	while($rows = mysqli_fetch_assoc($query_run))
+
+{
+?>
+
+<tr>
+	
+	<td><?php echo $rows['name'];?></td>
+	<td><?php echo $rows['updates'];?></td>
+	<td><?php echo $rows['advisor'];?></td>
+	<td><?php echo $rows['recommendation'];?></td>
+</tr>
+
+ <?php
+}
+
+// else
+// {
+// 	die();
+// }
+}?>
+
+
+
+
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="admin.css">
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Admin Home</title>
+</head>
+<body>
+
+<h2>Add Data</h2>
+
+<section>
+	<div class="admin_panel">
+	<form action="admin.php" action="post">
+<table width="100%">
+	
+	            <th>Admin Name</th>
+				<th>Updates</th>
+				<th>Recommended advisor</th>
+				<th>Recommendation</th>
+
+
+	<tr>
+		<td width="25%"><input type="text" name ="disease" value="disease" placeholder="Enter disease" required></td>
+		<td><input type="text" name="symptom" placeholder="Enter Symptom" vaue="symptom" required></td>
+		<td><input type="text" name="medication" placeholder="Medication" value="medication " required></td>
+		<td><input type="text" name="mode" placeholder="Mode of transimission" value="mode" required></td>
+	</tr>
+
+
+</table>
+<input type="submit" value="Submit">
+</form>
+</div>
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+<?php
+
+$server="localhost";
+$username="root";
+$password="";
+$dbname="addicts";
+
+
+$conn= mysqli_connect($server,$username,$password,$dbname);
+
+if(!$conn)
+{
+	echo "Connection failed!";
+	exit();
+}
+<?php
+$server="localhost";
+$username="root";
+$password="";
+$dbname="addicts";
+
+
+$con=  mysqli_connect($server,$username,$password,$dbname);
+
+//checking for connection
+if($con->connect_error)
+{
+	die('Connect Error('.$con->connect_errno.')'.$con->connect_error);
+}
+
+//SQL query to select data from database
+
+
+$del ="DELETE FROM smoker WHERE id= '15'   ";
+
+
+
+if($con->query($del)===TRUE)
+{?><script type="text/javascript">
+	alert("Record deleted successfully.");
+	location="admindata.php";
+</script><?php
+	
+}else
+{?><script type="text/javascript">
+	alert("Error deleting record");
+	// location="admindata.php";
+</script><?php
+
+}
+
+$con->close();
+
+?>
+
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="style.css">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Homepage</title>
+	<style type="text/css">
+			.about_content
+ 		{
+ 			background-color: grey;
+ 		}
+ 		.navbar
+ 		{
+ 			overflow: hidden;
+ 			background-color: #333;
+ 			font-family: Arial;
+ 		}
+ 		.navbar a
+ 		{
+ 			
+ 			float: left;
+ 			font-size: 16px;
+ 			color: white;
+ 			text-align: center;
+ 			padding: 14px 16px;
+ 			text-decoration: none;
+
+ 		}
+ 		.dropdown
+ 		{
+ 			float: left;
+ 			overflow: hidden;
+ 		}
+ 		.dropdown .dropbtn
+ 		{
+ 			font-size: 16px;
+ 			border: none;
+ 			outline: none;
+ 			color: white;
+ 			padding: 14px 16px;
+ 			background-color: inherit;
+ 			font-family: inherit;
+ 			margin: 0;
+
+ 		}
+ 		.navbar a:hover, .dropdown:hover .dropbtn
+ 		{
+ 			background-color: red;
+ 		}
+ 		.dropdown-content
+ 		{
+ 			display: none;
+ 			position: absolute;
+ 			background-color: #f9f9f9;
+ 			min-width: 160px;
+ 			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+ 			z-index: 1;
+ 		}
+ 		.dropdown-content a
+ 		{
+ 			float: none;
+ 			color: black;
+ 			padding: 12px 16px;
+ 			text-decoration: none;
+ 			display: block;
+ 			text-align: left;
+ 		}
+ 		.dropdown-content a:hover
+ 		{
+ 			background-color: #ddd;
+ 		}
+ 		.dropdown:hover .dropdown-content
+ 		{
+ 			display: block;
+ 		}
+
+	</style>
+	
+	<h2 align="center" class="h3">ADDICT'S ONLINE WEBSITE</h2>
+	
+
+</head>
+<body>
+	<div class="navbar">
+		<a href="index.html">Home</a>
+		<a href="login.html">News</a>
+		<div class="dropdown">
+		<button class="dropbtn">Main Menu<i class="fa fa-caret-down"></i></button>
+		<div class="dropdown-content">
+			<a href="login.html">Login</a>
+			<a href="signup.html">Signup</a>
+			<a href="aboutus.php">About</a>
+		</div>
+		</div>
+	</div>
+
+
+
+
+
+    <div class="hometext">
+	<p>Welcome to our online platform where you will find most of the latest updates, information on drugs and substance abuse. You will also have a chance to find professional and appropriate advisor/Counselor to guide you on substance and drug abuse.  
+	Our aim is to create awareness about the commonly abused drugs, how to prevent and control subsatance and drug abuse to the youths who are more vulnarable. Through this platform, we believe the information will be of great value to its users and the abuse will be controlled hence saving more lifes. </p>
+</div>
+<div id="slider">
+	<figure>
+		<img src="images/img1.jpg" height="450px">
+		<img src="images/img2.jpg" height="450px">
+		<img src="images/img3.jpg" height="450px">
+		<img src="images/img4.jpg" height="450px">
+		<img src="images/img5.jpg" height="450px">
+	
+</div>
+</figure>
+</div>
+
+
+
+
+<div class="about_content"  align="center">
+<h1 align="center"><a href="aboutus.php">About</a></h1>
+
+ 	<p>This website is developed by <i>NYAMBANE OMBUGI DANIEL</i> a South Eastern Kenya University(SEKU) student as his project II supervised by <b>Miss. Damaris Kangogo</b>. Research and hardwork made it a success. We believe he will be amongst the best developers in the near future. </p>
+
+
+ 	
+ 	
+
+
+
+	<h2 ><u>Contact Developer:</u></h2>
+
+		<h3>Facebook</h3>
+		Click<a href="https://www.facebook.com/acid.acidic.56"> here </a> to chat me on Facebook.
+		<h3>Email</h3>
+		Click<a href="https://mail.google.com/mail/u/0/#inbox"> here </a>to inbox me on Email.
+		<h3>WhatApp</h3>
+		Click <a href="https://wa.me/message/S7ZBALCEECEHH1">here </a>to chat me on whatsapp.<br><br>
+	
+
+		<h3>Are you a new member?</h3>
+		Click <a href="signup.html"> here</a> to signup.
+			<br><br><br>
+		</div>
+		</div></div>
+
+
+</body>
+</html>
+body
+{
+	margin: 0;
+	padding: 0;
+	font-family: montserrat;
+	background: skyblue;
+	height: 100vh;
+	overflow: hidden;
+}
+.center
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 400px;
+	background: white;
+	border-radius: 10px;
+}
+.center h1
+{
+	text-align: center;
+	padding: 0 0 20px 0;
+	border-bottom: 1px solid silver ;
+}
+.center form{
+	padding: 0 40px;
+	box-sizing: border-box;
+}
+form .txt_field{
+	position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+}
+.txt_field input{
+	width: 100%;
+	padding: 0 5px;
+	height: 60px;
+	font-size: 16px;
+	border: none;
+	background: none;
+	outline: none;
+}
+.txt_field label{
+	position: absolute;
+	top: 50%;
+	left: 5px;
+	color: #adadad;
+	transform: translate(-50%);
+	font-size: 16px;
+	pointer-events: none;
+	transform: .5s;
+}
+.txt_field span::before{
+	content: '';
+	position: absolute;
+	top: 40px;
+	left: 0;
+	width: 0%;
+	height: 2px;
+	background: #2691d9;
+	transition: .5s;
+}
+.txt_field input:focus~label,
+.txt_field input:valid~label,
+.txt_field input:valid~label{
+	top: -5px;
+	color: #2691d9;
+}
+.txt_field input:focus~span :: before,
+.txt_field input:valid~span :: before,
+.txt_field input:valid~span :: before{
+	width: 100%;
+
+}
+.pass{
+	margin: -5px 0 20px 5px;
+	color: a6a6a6;
+	cursor: pointer;
+
+}
+.pass:hover{
+	text-decoration: underline;
+
+}
+input[type="submit"]{
+	width: 100%;
+	height: 50px;
+	border: 1px solid;
+	background: skyblue ;
+	border-radius: 25px;
+	font-size: 18px;
+	font-weight: 700;
+	cursor: pointer;
+	outline: none;
+
+}
+input [type="submit"]:hover{
+border-color: skyblue;
+transition: .5s;	
+
+}
+.signup_link{
+	margin: 30px 0;
+	text-align: center;
+	font-size: 16px;
+	color: #666666;
+
+}
+.signup_link a{
+	color: skyblue;
+	text-decoration: none;
+}
+.signup_link: hover{
+	text-decoration: underline;
+}
+   <!DOCTYPE html>
+   <html>
+   <head>
+   	<meta charset="utf-8">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+   	<title>Login Form</title>
+   	<link rel="stylesheet" type="text/css" href="login.css">
+   </head>
+   <body>
+    <a href="index.html">🏠</a>
+   	<div class="center">
+   		<h1>Login</h1>
+
+   		<form action="login.php" method="POST">
+   			<div class="txt_field">
+   				<input type="text"  name="username" required>
+   				<span></span>
+   				<label>Username</label>
+   			</div>
+   			<div class="txt_field">
+   				<input type="password"  name="password" required>
+   				<label>Password</label>
+   			</div>
+   				<span></span>
+   				<div class="pass">Forgot Password?</div>
+   				<input type="submit" value="Login">
+
+   				<div class="signup_link">
+   					Not a member?<a href="signup.html">Signup</a>
+   					
+   				</div>
+   		</form>
+   
+   </body>
+   </html>
+<?php
+
+$host="localhost";
+$user="root";
+$password="";
+$db="addicts";
+
+session_start();
+
+
+
+
+$data = mysqli_connect($host,$user,$password,$db);
+if($data===false)
+{
+	die("Connection error");
+}
+if($_SERVER['REQUEST_METHOD']=="POST")
+{
+	$username=$_POST['username'];
+	$password=$_POST['password'];
+
+	$password_hash= md5($password);
+
+	$sql="SELECT * FROM register WHERE username= '".$username."' AND password='".$password_hash."'";
+
+	$result = mysqli_query($data,$sql);
+	$row= mysqli_fetch_array($result);
+
+	if($row["category"]=="user")
+	{
+		$_SESSION['username']=$username;
+	?><script type="text/javascript">
+		alert("User login Successfully");
+		location="userdata.php";
+	</script><?php
+	}
+	elseif ($row["category"]=="admin")
+	 {
+	 	$_SESSION['username']=$username;
+	 ?><script type="text/javascript">
+	 	alert("Admin login Successful");
+	 
+		location="admindata.php";
+		</script><?php
+	}else
+	
+	 {
+	 	// $_SESSION['username']=$username;
+	 ?><script type="text/javascript">
+	 	alert("User name or password incorrect");
+	 
+		location="login.html";
+		</script><?php
+	}
+
+}
+
+
+
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Services</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+</script>
+</body>
+</html>
+
+<?php 
+session_start();
+
+$server="localhost";
+$username="root";
+$password="";
+$dbname="addicts";
+
+
+if(!$con= mysqli_connect($server,$username,$password,$dbname))
+{
+die("Connection failed");
+}
+
+
+
+if($_SERVER['REQUEST_METHOD']="POST")
+{
+
+$message = $_REQUEST['mess'];
+$username = $_REQUEST['username'];
+
+
+$query="INSERT INTO message (username,messages) VALUES('$username','$message') ";
+
+$result= mysqli_query($con,$query);
+if(!$result)
+{
+?><script type="text/javascript">
+  alert("Comment not sent");
+  location="userdata.php";
+</script><?php
+}else
+{
+?><script type="text/javascript">
+  alert("Comment sent successfully");
+  location="userdata.php";
+</script><?php
+}
+
+}
+
+
+?>
+<?php
+$server="localhost";
+$username="root";
+$password="";
+$dbname="addicts";
+
+
+$con=  mysqli_connect($server,$username,$password,$dbname);
+
+//checking for connection
+if($con->connect_error)
+{
+	die('Connect Error('.$con->connect_errno.')'.$con->connect_error);
+}
+
+if(isset($_POST['submit']))
+{
+	$mind = $_POST['mind'];
+	$username = $_POST['username'];
+
+	$query= "INSERT INTO usermind (mind, username) VALUES('$mind', '$username')";
+
+	$query_run = mysqli_query($con, $query);
+
+	if($query_run)
+	{
+	?><script type="text/javascript">
+		alert("Your post was successful");
+		location="userdata.php";
+	</script><?php
+	}
+
+}else
+{
+?><script type="text/javascript">
+	alert("Your post was not successful");
+	location="userdata.php";
+</script><?php
+}
+
+<?php 
+session_start();
+
+$server="localhost";
+$username="root";
+$password="";
+$dbname="addicts";
+
+
+if(!$con= mysqli_connect($server,$username,$password,$dbname))
+
+
+
+
+{
+die("Failed to connect");
+}
+
+if($_SERVER['REQUEST_METHOD']=="POST")
+{
+	$username=$_POST['username'];
+	$password=$_POST['password'];
+    $cpassword=$_POST['cpassword'];
+	if($password!=$cpassword)
+    {
+    ?><script type="text/javascript">
+        alert("Password do not match!");
+        location="signup.html";
+    </script><?php
+    }else
+    {
+$password_hash=md5($password);
+
+
+	
+      $query = "INSERT INTO register (username, password) VALUES ('$username', '$password_hash')";
+      $result= mysqli_query($con, $query); 
+
+
+     if($result)
+     {
+  ?><script type="text/javascript">
+  	alert("Signup successful");
+ location="login.html";
+  </script><?php
+}else
+{
+    ?><script type="text/javascript">
+    alert("Signup failed!");
+ location="login.html";
+  </script><?php
+}
+
+}
+}
+
+    
+
+
+
+ ?>
+
+
+
+   <!DOCTYPE html>  
+   <html>
+   <head>
+   	<meta charset="utf-8">
+   	<meta name="viewport" content="width=device-width, initial-scale=1">
+   	<title>Signup</title>
+   	<link rel="stylesheet" type="text/css" href="login.css">
+   </head>
+   <body>
+      <a href="index.html">🏠</a>
+   	<div class="center">
+   		<h1>Signup</h1>
+
+   		<form action="sign.php" method="post">
+   			<div class="txt_field">
+   				<input type="text" required name="username">
+   				<span></span>
+   				<label>Username</label>
+   			</div>
+   			<div class="txt_field">
+   				<input type="password"  name="password" required>
+   				<label>Password</label>
+            </div>
+            <div class="txt_field">
+               <input type="password"  name="cpassword" required>
+               <label>Confirm Password</label>
+            </div>
+               <div >
+
+               <!-- <label>Usertype</label><br>
+               <select name="category" required>
+                  <option></option>
+                  <option value="admin">Admin</option>
+                  <option value="user">User</option>
+                                    
+               </select>
+ -->              
+            </div><br>
+   			
+   				<span></span>
+   				
+   				<input type="submit" value="Register">
+
+   				<div class="signup_link">
+   					Already a member?<a href="login.html">Login</a>
+   					
+   				</div>
+   		</form>
+
+
+   
+   </body>
+   </html>
+<?php
+require_once("signup.html");
+$server="localhost";
+$username="root";
+$password="";
+$dbname="user";
+
+
+
+
+
+$conn= mysqli_connect($server,$username,$password,$dbname);
+if(isset($_POST['submit']))
+{
+
+	if(!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['usertype']))
+{
+
+$name=$_POST['usename'];
+$password=$_POST['password'];
+$usertype=$_POST['usertype'];
+
+$query="INSERT INTO login(username,password,usertype) VALUES ($name','$password','$usertype')";
+
+$run=mysqli_query($conn,$query) or die(mysql_error());
+
+if($run)
+{
+?><script type="text/javascript">
+alert("Form submitted succesfully");
+location="login.html";
+</script><?php
+	}
+else
+{
+	?><script type="text/javascript">
+alert("Form not submitted");
+location="signup.html";
+</script><?php
+
+}
+}else
+	     {
+	     ?><script type="text/javascript">
+	     	alert("All fields required!");
+	     	location="signup.html";
+	     </script><?php
+		
+	     }
+}
+
+	?>
+
+body
+{
+	background-color: skyblue;
+}
+<?php
+$server="localhost";
+$username="root";
+$password="";
+$dbname="addicts";
+
+
+$con=  mysqli_connect($server,$username,$password,$dbname);
+
+//checking for connection
+if($con->connect_error)
+{
+	die('Connect Error('.$con->connect_errno.')'.$con->connect_error);
+}
+
+//SQL query to select data from database
+
+$query="SELECT * FROM smoker";
+$query_run = mysqli_query($con,$query);
+
+$con->close();
+
+?>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Smoker Panel</title>
+</head>
+<body>
+	<a href="index.html">🏠</a>
+	<style type="text/css">
+		body
+		{
+			background-color: skyblue;
+		}
+		table
+		{
+			margin: auto;
+			font-size: large;
+			border: 1px solid black;
+			width: 100%;
+
+
+		}
+		h1
+		{
+			margin: auto;
+			color: #00600;
+			font-size: xx-large;
+			font-family: 'Gill Sans','sans-serif;';
+		}
+		th
+	{
+		background-color: black;
+		color: white;
+	}
+
+
+		td
+		{
+			background-color: #E4F5D4;
+			/*border: 1px solid black;*/
+			padding: 10px;
+			text-align: center;
+		}
+		td
+		{
+			font-weight: lighter;
+		}
+	</style>
+
+	<section>
+		<h1 align="center">Welcome</h1>
+		<h3>Today's update from the Admin is as below</h3> 
+		
+
+	</p>
+		<table>
+			<tr>
+				<th>Admin Name</th>
+				<th>Updates</th>
+				<th>Recommended advisor</th>
+				<th>Recommendation</th>
+
+			</tr>
+<?php //php code to fetch data from rows
+
+// while($rows= mysqli_fetch_array($result))
+// if($result->num_rows > 0)
+if(mysqli_num_rows($query_run) > 0)
+{
+
+
+
+
+	while($rows = mysqli_fetch_assoc($query_run))
+
+{
+?>
+
+<tr>
+	
+	<td><?php echo $rows['name'];?></td>
+	<td><?php echo $rows['updates'];?></td>
+	<td><?php echo $rows['advisor'];?></td>
+	<td><?php echo $rows['recommendation'];?></td>
+	
+</tr>
+
+ <?php
+}
+
+// else
+// {
+// 	die();
+// }
+}?>
+
+
+
+
+		</table>
+	</section>
+
+	<section>
+		<h4>Leave your comment here👇</h4>
+<form action="message.php" action="post">
+	
+<form>
+<textarea name="messages" rows="3" cols="50" placeholder="Enter your comment here..."></textarea><br>
+
+<input type="submit" name="messagebtn" value="Submit">
+
+	</br><br></form>
+	</form>
+
+</div>
+</section>
+
+
+
+
+<h1 align="center"><a href="aboutus.php"> About us</a></h1>
+ 	<p>This website was developed a SEKU student as his project II guided by <b>Miss. Kangogo</b>. Research and hardwork made it a success. We hope we gonna be the best developers in the near future. </p>
+
+
+
+
+
+
+ 	
+		
+			
+
+		</table>
+</span> 
+<div class="contactus" align="center">		
+	<h2>Contact us on:</h2>
+
+		<h3>Facebook</h3>
+		Click<a href="https://www.facebook.com/acid.acidic.56"> here </a> to chat us on Facebook.
+		<h3>Email</h3>
+		Click<a href="https://www.gmail.com"> here </a>to inbox us on Email.
+		<h3>WhatApp</h3>
+		Click <a href="https://wa.me/message/S7ZBALCEECEHH1">here </a>to chat us on whatsapp.<br><br>
+		</div>
+
+
+</body>
+</html>
+body
+{
+	padding: 10px;
+	margin: 10px;
+	background: skyblue;
+	text-align: left;
+}
+.topic h2
+{
+	text-align: center;
+	background: white;
+	border-bottom: 5px solid;
+	color: blue;
+	border-radius: 20px;
+}
+.h3
+{
+	color: white;
+}
+.btns
+{
+	text-align: right;
+	border: 3px solid ;
+	border-radius: 10px;
+	margin: 5px;
+	font-size: 18px;
+	background: silver;
+
+}
+.btns:hover{
+	cursor: pointer;
+	color: white;
+	background: skyblue;
+}
+.hometext
+{
+	text-align: initial;
+}
+#slider
+{
+	overflow: hidden ;
+}
+#slider figure
+{
+	 position: relative;
+	 width: 500%;
+	 margin: 0;
+	 left: 0;
+	 animation: 20s slider infinite;
+}
+#slider figure img
+{
+	width: 20%;
+	float: left;
+}
+@keyframes slider
+{
+0%
+{
+	left 0;
+}
+20%
+{
+	left 0;
+}
+25%
+{
+	left: -100%;
+}
+45%
+{
+	left: -100%;
+}
+50%
+{
+	left:  -200%
+}
+70%
+{
+	left: -200%;
+} 
+75%
+{
+	left: -300%;
+}
+100%
+{
+	left: -400%;
+}
+}
+<?php 
+session_start();
+
+$server="localhost";
+$username="root";
+$password="";
+$dbname="addicts";
+
+
+$con= mysqli_connect($server,$username,$password,$dbname);
+if($con=== false)
+{
+  die("Error: Could not connect.".mysqli_conect_error());
+}else
+{
+	if(isset($_POST['updatebtn']))
+	{
+		
+		$name = $_POST['nameupd'];
+		$updates = $_POST['updatesupd'];
+		$advisor = $_POST['advisorupd'];
+		$recommendation = $_POST['recommendationupd'];
+
+
+$query_update ="SELECT * FROM smoker";
+
+$result = mysqli_query($con,$query_update);
+
+
+
+$query= "UPDATE smoker SET name='$name',updates='$updates',advisor='$advisor',recommendation='$recommendation'  WHERE id='23' ";
+        $query_run= mysqli_query($con, $query);
+
+        if($query_run)
+        {?><script type="text/javascript">
+        	alert("Your data has been updated successfully");
+        	location="admindata.php";
+        </script><?php
+        	// $_SEESION['success']= "Your data is updated";
+        	// header("location:admindata.php");
+        }else
+        {?><script type="text/javascript">
+        	alert("Your data is not updated");
+        	location="updatebtn.php";
+        </script><?php
+        	// $_SEESION['status'] = "Your data is not updated";
+        	// header("location:updatebtn.php");
+        }
+}
+}
+
+		
+?>
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Update details</title>
+</head>
+<body>
+	<style type="text/css">
+		body
+		{
+			background: skyblue;
+			margin: 10px;
+			padding: 2px;
+			
+		}
+		.update_form
+		{
+			top: 50%;
+			left: 50%;
+		}
+	</style>
+
+
+
+
+<h2>Edit post</h2>
+
+<section class="update_form">
+	
+	<form action="updatebtn.php" method="post">
+ <table width="100%">
+	
+
+
+	<span>
+		
+		 <label>Admin Name</label><br>
+		 <textarea name="nameupd" rows="5" cols="30" placeholder="Admin name..." required></textarea>
+		 <!-- <input type="text" name ="nameupd"  placeholder="Admin name" required> --><br><br>
+
+		<label>Updates</label><br>
+		<textarea name="updatesupd" rows="5" cols="30" placeholder="Updates..." required></textarea>
+		<!-- <input type="text" name="updatesupd" placeholder="Updates"required> --><br><br>
+
+		<label>Advisor</label><br>
+		<textarea name="advisorupd" rows="5" cols="30" placeholder="Advisor..." required></textarea>
+
+		<!-- <input type="text" name="advisorupd" placeholder="Advisor" required> -->
+<br><br>
+		<label>Recommendation</label><br>
+			<textarea name="recommendationupd" rows="5" cols="30" placeholder="Recommendation..." required></textarea>
+
+		<!-- <input type="text" name="recommendationupd" placeholder="Recommendation" required> --></td><br><br></span>
+	
+</table>
+<input type="submit" name="updatebtn" value="UPDATE">
+</form></section>
+</div>
+
+</body>
+</html> 
+ <?php
+
+if(isset($_POST['submit']) && isset($_FILES['my_image']))
+{
+	include "db_conn.php";
+	echo "<pre>";
+	print_r($_FILES['my_image']);
+	echo"</pre>";
+
+	$img_name = $_FILES['my_image']['name'];
+	$img_size = $_FILES['my_image']['size'];
+	$tmp_name = $_FILES['my_image']['tmp_name'];
+	$error = $_FILES['my_image']['error'];
+
+	if($error===0)
+	{
+		if($img_size >1000000)
+		{
+			$em= "Sorry your file is too large";
+			header("Location: userdata.php? error=$em");
+
+		}else
+		{
+			$img_ex=pathinfo($img_name, PATHINFO_EXTENSION);
+	        $img_ex_lc= strtolower($img_ex);
+
+	        $allowed_ex = array("jpg","jpeg", "png");
+	        if(in_array( $img_ex_lc,   $allowed_ex))
+	        {
+	        	$new_img_name = uniqid("IMG-", true).'.'.$img_ex_lc;
+	        	$img_upload_path= 'img/'.$new_img_name;
+	        	move_uploaded_file($tmp_name, $img_upload_path);
+
+	        	//insert into database
+	        	$sql= "INSERT INTO upload(image) VALUES('$new_img_name') ";
+	        	mysqli_query($conn,$sql);
+
+
+	        }else
+
+	       {
+	       	$em= "You cant upload files of this type";
+		    header("Location: userdata.php? error=$em");
+	       }
+
+		}
+		$em= "Unknown error occured";
+
+		header("Location: userdata.php? error=$em");
+	}
+}else
+{
+	header("Location: userdata.php");
+}
+<?php
+
+$server="localhost";
+$username="root";
+$password="";
+$dbname="addicts";
+
+
+$con=  mysqli_connect($server,$username,$password,$dbname);
+
+//checking for connection
+if($con->connect_error)
+{
+	die('Connect Error('.$con->connect_errno.')'.$con->connect_error);
+}
+
+//SQL query to select data from database
+
+$query="SELECT * FROM smoker ORDER BY id DESC";
+$query_run = mysqli_query($con,$query);
+
+
+$mind = "SELECT * FROM usermind ORDER BY id DESC";
+$mind_run = mysqli_query($con, $mind);
+
+$con->close();
+
+?>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>User Panel</title>
+</head>
+<body>
+	<a href="index.html">🏠</a>
+	<style type="text/css">
+		body
+		{
+			background-color: skyblue;
+		}
+		table
+		{
+			margin: auto;
+			font-size: large;
+			border: 1px solid black;
+			width: 100%;
+
+
+		}
+		h1
+		{
+			margin: auto;
+			color: #00600;
+			font-size: xx-large;
+			font-family: 'Gill Sans','sans-serif;';
+		}
+		th
+	{
+		background-color: black;
+		color: white;
+	}
+
+
+		td
+		{
+			background-color: #E4F5D4;
+			/*border: 1px solid black;*/
+			padding: 10px;
+			text-align: center;
+		}
+		td
+		{
+			font-weight: lighter;
+		}
+		.h3
+		{
+			color: white ;
+		}
+		.about_content
+		{
+			background-color: grey;
+		}
+	</style>
+
+	<section>
+		<h1 align="center" class="h3">Welcome</h1>
+		<h3 align="center" class="h3">Today's update from the Admin is as below </h3> 
+		
+
+	</p>
+		<table>
+			<tr>
+				<th>Admin Name</th>
+				<th>Updates</th>
+				<th>Recommended advisor</th>
+				<th>Recommendation</th>
+				<th>Time</th>
+
+			</tr>
+<?php 
+//php code to fetch data from rows
+
+
+if(mysqli_num_rows($query_run) > 0)
+{
+
+	while($rows = mysqli_fetch_assoc($query_run))
+
+{
+?>
+
+<tr>
+	
+	<td><?php echo $rows['name'];?></td>
+	<td><?php echo $rows['updates'];?></td>
+	<td><?php echo $rows['advisor'];?></td>
+	<td><?php echo $rows['recommendation'];?></td>
+	<td><?php echo $rows['time'];?></td>
+	
+</tr>
+
+ <?php
+}
+
+
+}?>
+
+
+
+
+		</table>
+	</section>
+
+	<section><div align="left">
+		<h4>Leave your comment here👇</h4>
+<form action="message.php" action="post">
+	
+
+<textarea name="mess" rows="3" cols="50" placeholder="Enter your comment here..."></textarea><br>
+
+	<textarea name="username" rows="3" cols="25" placeholder="Enter your username e.g. AcidKE"></textarea>
+	
+
+
+<div align="left">
+<input type="submit" name="messagebtn" value="Comment">
+</div><br>
+
+	</br><br></form>
+	</form>
+
+</div>
+</section>
+
+
+ <section>
+	<div align="left">
+
+		<form action="mind.php" method="POST"> 
+
+			<label><b>Use the space below to post something 👇</b></label><br>
+
+			<textarea rows="7" cols="50" name="mind" required placeholder="What is on your mind?" ></textarea>
+			 <br>
+			 <textarea rows="3" cols="25" name="username" required placeholder="Enter your username e.g. AcidKE" ></textarea>
+			 <br>
+			 <input type="submit" name="submit" value="PUBLISH">
+			</form>
+		
+	</div>
+</section><br><br> 
+
+
+<table>
+<tr>
+	<th>Addict Name</th>
+	<th>Post</th>
+	<th>Date/time</th>
+	</tr>
+
+<?php
+
+if(mysqli_num_rows ($mind_run) > 0)
+{
+	while($row= mysqli_fetch_assoc($mind_run))
+	{?>
+ <tr>
+<td><b><?php echo $row['username'];  ?></b> posted </td>
+<td><?php echo $row['mind'];   ?></td>
+<td><?php echo $row['time'];   ?></td>
+</tr><?php
+
+	}
+}
+
+?>
+
+</table><br><br>
+
+
+
+
+
+
+
+
+<div class="about_content">
+
+<h1 align="center"><a href="aboutus.php"> About</a></h1>
+ 	<p>This website was developed by <i>NYAMBANE OMBUGI DANIEL</i> a South Eastern Kenya University(SEKU) student as his project II supervised by <b>Miss. Damaris Kangogo</b>. Research and hardwork made it a success. We hope he gonna be amongst the best developers in the near future. </p>
+
+
+
+
+
+
+ 	
+		
+			
+
+		</table>
+</span> 
+<div class="contactus" align="center">		
+	<h2>Contact Developer:</h2>
+
+		<h3>Facebook</h3>
+		Click<a href="https://www.facebook.com/acid.acidic.56"> here </a> to chat me on Facebook.
+		<h3>Email</h3>
+		Click<a href="https://www.gmail.com"> here </a>to inbox me on Email.
+		<h3>WhatApp</h3>
+		Click <a href="https://wa.me/message/S7ZBALCEECEHH1">here </a>to chat me on whatsapp.<br><br>
+		</div>
+	</div>
+
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>User Home</title>
+</head>
+<body>
+	<h2>Hellow user🤣</h2>
+
+</body>
+</html>
+body
+{
+	background: skyblue;
+	text-align: left;
+	font: sans-serif;
+	margin: 10px;
+	padding: 0px;
+
+}
+.tb
+{
+
+	width: 50%;
+	height: 70px;
+}
+.thead
+{
+width: 100%;
+text-align: center;
+}
+.image1
+{
+  text-align: center;
+ 
+	
+	width: 100%;
+}
+.nms td
+{
+font-family: Arial, Helvetica, sans-serif;
+font-family: sans-serif;
+text-align: center;
+}
+.contactus 
+{
+background-color: grey;
+color: darkblue;
+	
+}s
+
+
+
+
+
+
+
